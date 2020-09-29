@@ -14,28 +14,28 @@
 <body>
 
   <div class="nombre-sitio contenedor">
-        <h1>
-            <a href="/">devJobs</a>
-        </h1>
+    <h1>
+      <a href="/">devJobs</a>
+    </h1>
 
-        {{#if barra}}
-            <div class="buscador">
-                <form action="/buscador" method="POST">
-                    <input type="text" name="q" class="buscar">
-                    <input type="submit" value="Buscar">
-                </form>
-            </div>
-        {{/if}}
+    {{#if barra}}
+    <div class="buscador">
+      <form action="/buscador" method="POST">
+        <input type="text" name="q" class="buscar">
+        <input type="submit" value="Buscar">
+      </form>
     </div>
+    {{/if}}
+  </div>
 
   <header class="site-header contenedor separador">
     <h2>{{nombrePagina}}</h2>
     {{#if tagline}}
-      <p class="tagline">{{tagline}}</p>
+    <p class="tagline">{{tagline}}</p>
     {{/if}}
 
     {{#if boton}}
-      <a href="/vacantes/nueva" class="btn btn-azul">Publicar Nueva Vacante</a>
+    <a href="/vacantes/nueva" class="btn btn-azul">Publicar Nueva Vacante</a>
     {{/if}}
   </header>
 
@@ -45,5 +45,8 @@
     {{{body}}}
   </div>
 </body>
+
+<script src="/js/trix.js"></script>
+{{!-- <script src="/dist/bundle.js"></script> --}}
 
 </html>
