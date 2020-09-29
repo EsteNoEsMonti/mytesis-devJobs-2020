@@ -1,11 +1,10 @@
-
 {
   "name": "tesis-devjobs",
   "version": "1.0.0",
   "description": "This is my thesis, it's a DevJobs portal with nodeJS Handlebars Mongoose",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon ./index"
   },
   "repository": {
     "type": "git",
@@ -16,5 +15,12 @@
   "bugs": {
     "url": "https://github.com/MKluna/tesis-devJobs/issues"
   },
-  "homepage": "https://github.com/MKluna/tesis-devJobs#readme"
+  "homepage": "https://github.com/MKluna/tesis-devJobs#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-handlebars": "^5.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
 }
