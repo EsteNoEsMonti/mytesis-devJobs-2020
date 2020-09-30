@@ -13,11 +13,11 @@ module.exports = () => {
     // authController.verificarUsuario,
     vacantesController.formularioNuevaVacante
   );
-  // router.post('/vacantes/nueva',
-  //   authController.verificarUsuario,
-  //   vacantesController.validarVacante,
-  //   vacantesController.agregarVacante
-  // );
+  router.post('/vacantes/nueva',
+    // authController.verificarUsuario,
+    // vacantesController.validarVacante,
+    vacantesController.agregarVacante
+  );
 
   return router;
 }

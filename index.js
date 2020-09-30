@@ -7,6 +7,11 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
+const bodyParser = require('body-parser');
+// const expressValidator = require('express-validator');
+// const flash = require('connect-flash');
+// const createError = require('http-errors');
+// const passport = require('./config/passport');
 
 const router = require('./routes');
 
@@ -14,11 +19,18 @@ require('dotenv').config({ path : 'variables.env'});
 
 const app = express();
 
+// habilitar body-parser
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+
 // habilitar handlebars como view
 app.engine('handlebars',
   exphbs({
     defaultLayout: 'layout',
-    // helpers: require('./helpers/handlebars')
+    helpers: require('./helpers/handlebars') // Los Helpers son una forma en la que registras
+                                            // registras scripts para que se comuniquen
+                                           // directamente con handlebars antes de su salida
+                                          // y eso es lo que se está haciendo par mostrar las skills.
   })
 );
 app.set('view engine', 'handlebars');
