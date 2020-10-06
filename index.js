@@ -2,7 +2,11 @@ const mongoose = require('mongoose');
 require('./config/db');
 
 const express = require('express');
+// New Handlebars
+const handlebars = require('handlebars');
 const exphbs = require('express-handlebars');
+const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access');
+//---
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
@@ -25,14 +29,22 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 // habilitar handlebars como view
 app.engine('handlebars',
-  exphbs({
-    defaultLayout: 'layout',
-    helpers: require('./helpers/handlebars') // Los Helpers son una forma en la que registras
-                                            // registras scripts para que se comuniquen
-                                           // directamente con handlebars antes de su salida
-                                          // y eso es lo que se está haciendo par mostrar las skills.
-  })
+    exphbs({
+        handlebars: allowInsecurePrototypeAccess(handlebars),
+        defaultLayout: 'layout',
+        helpers: require('./helpers/handlebars')
+    })
 );
+// app.engine('handlebars',
+//   exphbs({
+//     andlebars: allowInsecurePrototypeAccess(handlebars),
+//     defaultLayout: 'layout',
+//     helpers: require('./helpers/handlebars') // Los Helpers son una forma en la que registras
+//                                             // registras scripts para que se comuniquen
+//                                            // directamente con handlebars antes de su salida
+//                                           // y eso es lo que se está haciendo par mostrar las skills.
+//   })
+// );
 app.set('view engine', 'handlebars');
 
 // static files

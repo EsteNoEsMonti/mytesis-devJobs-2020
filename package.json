@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/MKluna/tesis-devJobs#readme",
   "dependencies": {
+    "@handlebars/allow-prototype-access": "^1.0.3",
     "concurrently": "^5.3.0",
     "connect-mongo": "^3.2.0",
     "cookie-parser": "^1.4.5",
@@ -26,6 +27,7 @@
     "express": "^4.17.1",
     "express-handlebars": "^5.1.0",
     "express-session": "^1.17.1",
+    "handlebars": "^4.7.6",
     "mongoose": "^5.10.7",
     "shortid": "^2.2.15",
     "slug": "^3.3.5"

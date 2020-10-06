@@ -32,18 +32,18 @@ exports.agregarVacante = async (req, res) => {
 
 }
 
-// // muestra una vacante
-// exports.mostrarVacante = async (req, res, next) => {
-//     const vacante = await Vacante.findOne({ url: req.params.url }).populate('autor');
-//     // si no hay resultados
-//     if(!vacante) return next();
+// muestra una vacante
+exports.mostrarVacante = async (req, res, next) => {
+    const vacante = await Vacante.findOne({ url: req.params.url })/*.populate('autor')*/;
+    // si no hay resultados
+    if(!vacante) return next();
 
-//     res.render('vacante', {
-//         vacante,
-//         nombrePagina : vacante.titulo,
-//         barra: true
-//     })
-// }
+    res.render('vacante', {
+        vacante,
+        nombrePagina : vacante.titulo,
+        barra: true
+    })
+}
 
 // exports.formEditarVacante = async (req, res, next) => {
 //     const vacante = await Vacante.findOne({ url: req.params.url});
