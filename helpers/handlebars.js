@@ -5,21 +5,18 @@ module.exports = {
 
     let html = '';
     skills.forEach(skill => {
-      // html += `
-      //     <li ${seleccionadas.includes(skill) ? ' class="activo"' : ''}>${skill}</li>
-      // `;
       html += `
-               <li>${skill}</li>
-           `;
+          <li ${seleccionadas.includes(skill) ? ' class="activo"' : ''}>${skill}</li>
+      `;
     });
 
     return opciones.fn().html = html;
   },
-  // tipoContrato: (seleccionado, opciones) => {
-  //     return opciones.fn(this).replace(
-  //         new RegExp(` value="${seleccionado}"`), '$& selected="selected"'
-  //     )
-  // },
+  tipoContrato: (seleccionado, opciones) => {
+      return opciones.fn(this).replace(
+          new RegExp(` value="${seleccionado}"`), '$& selected="selected"'
+      )
+  },
   // mostrarAlertas: (errores = {}, alertas ) => {
   //     const categoria = Object.keys(errores);
 
