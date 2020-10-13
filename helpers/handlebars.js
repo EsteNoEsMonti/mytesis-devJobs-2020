@@ -17,17 +17,17 @@ module.exports = {
           new RegExp(` value="${seleccionado}"`), '$& selected="selected"'
       )
   },
-  // mostrarAlertas: (errores = {}, alertas ) => {
-  //     const categoria = Object.keys(errores);
+  mostrarAlertas: (errores = {}, alertas ) => {
+      const categoria = Object.keys(errores);
 
-  //     let html = '';
-  //     if(categoria.length) {
-  //         errores[categoria].forEach(error => {
-  //             html += `<div class="${categoria} alerta">
-  //                 ${error}
-  //             </div>`;
-  //         })
-  //     }
-  //     return alertas.fn().html = html;
-  // }
+      let html = '';
+      if(categoria.length) {
+          errores[categoria].forEach(error => {
+              html += `<div class="${categoria} alerta">
+                  ${error}
+              </div>`;
+          })
+      }
+      return alertas.fn().html = html;
+  }
 }

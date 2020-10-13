@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const homeController = require('../controllers/homeController');
 const vacantesController = require('../controllers/vacantesController');
-// const usuariosController = require('../controllers/usuariosController');
+const usuariosController = require('../controllers/usuariosController');
 // const authController = require('../controllers/authController');
 
 module.exports = () => {
@@ -39,15 +39,15 @@ module.exports = () => {
   //   vacantesController.eliminarVacante
   // );
 
-  // //crear cuentas
-  // router.get('/crear-cuenta',
-  //   usuariosController.formCrearCuenta
-  // )
+  //crear cuentas
+  router.get('/crear-cuenta',
+    usuariosController.formCrearCuenta
+  );
 
-  // router.post('/crear-cuenta',
-  //   usuariosController.validarRegistro,
-  //   usuariosController.crearUsuario
-  // );
+  router.post('/crear-cuenta',
+    usuariosController.validarRegistro,
+    usuariosController.crearUsuario
+  );
 
   // //Resetear password(emails)
   // router.get('/reestablecer-password',

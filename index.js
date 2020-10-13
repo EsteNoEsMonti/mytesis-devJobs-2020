@@ -12,8 +12,8 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const bodyParser = require('body-parser');
-// const expressValidator = require('express-validator');
-// const flash = require('connect-flash');
+const expressValidator = require('express-validator');
+const flash = require('connect-flash');
 // const createError = require('http-errors');
 // const passport = require('./config/passport');
 
@@ -22,6 +22,9 @@ const router = require('./routes');
 require('dotenv').config({ path : 'variables.env'});
 
 const app = express();
+
+//express validator
+app.use(expressValidator());
 
 // habilitar body-parser
 app.use(bodyParser.json());
@@ -59,6 +62,15 @@ app.use(session({
     saveUninitialized: false,
     store: new MongoStore({ mongooseConnection : mongoose.connection })
 }));
+
+// Alertas y flash messages
+app.use(flash());
+
+// Crear nuestro middleware (va a guardar los mensajes y que usuario)
+app.use((req, res, next) => {
+    res.locals.mensajes = req.flash();
+    next();
+});
 
 app.use('/', router())
 
