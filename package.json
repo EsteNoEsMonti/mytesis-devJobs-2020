@@ -32,6 +32,8 @@
     "express-validator": "^5.3.1",
     "handlebars": "^4.7.6",
     "mongoose": "^5.10.7",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
     "shortid": "^2.2.15",
     "slug": "^3.3.5"
   },

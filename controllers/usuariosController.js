@@ -102,12 +102,12 @@ exports.crearUsuario = async (req, res, next) => {
   }
 }
 
-// // formulario para iniciar sesión
-// exports.formIniciarSesion = (req, res ) => {
-//     res.render('iniciar-sesion', {
-//         nombrePagina : 'Iniciar Sesión devJobs'
-//     })
-// }
+// formulario para iniciar sesión
+exports.formIniciarSesion = (req, res ) => {
+    res.render('iniciar-sesion', {
+        nombrePagina : 'Iniciar Sesión devJobs'
+    })
+}
 
 // // Form editar el Perfil
 // exports.formEditarPerfil = (req, res) => {

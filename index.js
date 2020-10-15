@@ -15,7 +15,7 @@ const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
 const flash = require('connect-flash');
 // const createError = require('http-errors');
-// const passport = require('./config/passport');
+const passport = require('./config/passport');
 
 const router = require('./routes');
 
@@ -62,6 +62,10 @@ app.use(session({
     saveUninitialized: false,
     store: new MongoStore({ mongooseConnection : mongoose.connection })
 }));
+
+// inicializar passport
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Alertas y flash messages
 app.use(flash());

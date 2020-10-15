@@ -44,11 +44,11 @@ usuariosSchema.post('save', function (error, doc, next) {
   }
 });
 
-// // Autenticar Usuarios
-// usuariosSchema.methods = {
-//     compararPassword: function(password) {
-//         return bcrypt.compareSync(password, this.password);
-//     }
-// }
+// Autenticar Usuarios
+usuariosSchema.methods = { //esto permite agregar diferentes funciones que van a ejecutarse junto a este schema
+    compararPassword: function(password) {
+        return bcrypt.compareSync(password, this.password); //el password que estoy poniendo en el form y el passwprd que tengo hasheado
+    }
+}
 
 module.exports = mongoose.model('Usuarios', usuariosSchema);
