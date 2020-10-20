@@ -10,11 +10,11 @@ module.exports = () => {
 
   // Crear Vacantes
   router.get('/vacantes/nueva',
-    // authController.verificarUsuario,
+    authController.verificarUsuario,
     vacantesController.formularioNuevaVacante
   );
   router.post('/vacantes/nueva',
-    // authController.verificarUsuario,
+    authController.verificarUsuario,
     // vacantesController.validarVacante,
     vacantesController.agregarVacante
   );
@@ -24,12 +24,12 @@ module.exports = () => {
 
   //editar vacantes
   router.get('/vacantes/editar/:url',
-    // authController.verificarUsuario,
+    authController.verificarUsuario,
     vacantesController.formEditarVacante
   );
 
   router.post('/vacantes/editar/:url',
-    // authController.verificarUsuario,
+    authController.verificarUsuario,
     // vacantesController.validarVacante,
     vacantesController.editarVacante
   );
@@ -78,11 +78,11 @@ module.exports = () => {
   //   authController.cerrarSesion
   // );
 
-  // //panel de administracion
-  // router.get('/administracion',
-  //   authController.verificarUsuario,
-  //   authController.mostrarPanel
-  // );
+  //panel de administracion
+  router.get('/administracion',
+    authController.verificarUsuario,
+    authController.mostrarPanel
+  );
 
   // router.post('/iniciar-sesion', authController.autenticarUsuario);
 

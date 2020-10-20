@@ -1,6 +1,6 @@
 const passport = require('passport');
-// const mongoose = require('mongoose');
-// const Vacante = mongoose.model('Vacante');
+const mongoose = require('mongoose');
+const Vacante = mongoose.model('Vacante');
 // const Usuarios = mongoose.model('Usuarios');
 // const crypto = require('crypto');
 // const enviarEmail = require('../handlers/email');
@@ -12,33 +12,33 @@ exports.autenticarUsuario = passport.authenticate('local', {
     badRequestMessage : 'Ambos campos son obligatorios'
 });
 
-// // Revisar si el usuario esta autenticado o no
-// exports.verificarUsuario = (req, res, next) => {
+// Revisar si el usuario esta autenticado o no
+exports.verificarUsuario = (req, res, next) => {
 
-//     // revisar el usuario
-//     if(req.isAuthenticated()){
-//         return next(); // estan autenticados
-//     }
+    // revisar el usuario
+    if(req.isAuthenticated()){ //metodo de passport, devuelve true o false si el usuario esta autentucado o no
+        return next(); // estan autenticados
+    }
 
-//     // redireccionar
-//     res.redirect('/iniciar-sesion');
+    // redireccionar
+    res.redirect('/iniciar-sesion');
 
-// }
+}
 
-// exports.mostrarPanel = async (req, res) => {
+exports.mostrarPanel = async (req, res) => {
 
-//     // consultar el usuario autenticado
-//     const vacantes = await Vacante.find({ autor: req.user._id });
+    // consultar el usuario autenticado
+    const vacantes = await Vacante.find({ autor: req.user._id });
     
-//     res.render('administracion', {
-//         nombrePagina: 'Panel de Administración',
-//         tagline: 'Crea y Administra tus vacantes desde aquí',
-//         cerrarSesion: true,
-//         nombre : req.user.nombre,
-//         imagen : req.user.imagen,
-//         vacantes
-//     })
-// }
+    res.render('administracion', {
+        nombrePagina: 'Panel de Administración',
+        tagline: 'Crea y Administra tus vacantes desde aquí',
+        // cerrarSesion: true,
+        // nombre : req.user.nombre,
+        // imagen : req.user.imagen,
+        vacantes
+    })
+}
 
 
 // exports.cerrarSesion = (req, res) => {

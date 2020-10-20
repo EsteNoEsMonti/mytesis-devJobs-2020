@@ -41,11 +41,11 @@ const vacantesSchema =  new mongoose.Schema({
         email: String,
         cv : String
     }], 
-    // autor : {
-    //     type: mongoose.Schema.ObjectId, 
-    //     ref: 'Usuarios', 
-    //     required: 'El autor es obligatorio'
-    // }
+    autor : {
+        type: mongoose.Schema.ObjectId, 
+        ref: 'Usuarios', 
+        required: 'El autor es obligatorio'
+    }
 });
 
 vacantesSchema.pre('save', function(next) {
