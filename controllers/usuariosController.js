@@ -76,7 +76,7 @@ exports.validarRegistro = (req, res, next) => {
 
     res.render('crear-cuenta', {
       nombrePagina: 'Crea tu cuenta en devJobs',
-      tagline: 'Comienza a publicar tus vacantes gratis, solo debes crear una cuenta', 
+      tagline: 'Comienza a publicar tus vacantes gratis, solo debes crear una cuenta',
       mensajes: req.flash()
     });
     return;
@@ -94,77 +94,81 @@ exports.crearUsuario = async (req, res, next) => {
   // if (!nuevoUsuario) return next();
   // res.redirect('/iniciar-sesion');
   try {
-      await usuario.save();
-      res.redirect('/iniciar-sesion');
+    await usuario.save();
+    res.redirect('/iniciar-sesion');
   } catch (error) {
-      req.flash('error', error);
-      res.redirect('/crear-cuenta');
+    req.flash('error', error);
+    res.redirect('/crear-cuenta');
   }
 }
 
 // formulario para iniciar sesión
-exports.formIniciarSesion = (req, res ) => {
-    res.render('iniciar-sesion', {
-        nombrePagina : 'Iniciar Sesión devJobs'
-    })
+exports.formIniciarSesion = (req, res) => {
+  res.render('iniciar-sesion', {
+    nombrePagina: 'Iniciar Sesión devJobs'
+  })
 }
 
-// // Form editar el Perfil
-// exports.formEditarPerfil = (req, res) => {
-//     res.render('editar-perfil', {
-//         nombrePagina : 'Edita tu perfil en devJobs',
-//         usuario: req.user,
-//         cerrarSesion: true,
-//         nombre : req.user.nombre,
-//         imagen : req.user.imagen
-//     })
-// }
-// // Guardar cambios editar perfil
-// exports.editarPerfil = async (req, res) => {
-//     const usuario = await Usuarios.findById(req.user._id);
+// Form editar el Perfil
+exports.formEditarPerfil = (req, res) => {
+  res.render('editar-perfil', {
+    nombrePagina: 'Edita tu perfil en devJobs',
+    usuario: req.user,
+    cerrarSesion: true,
+    nombre: req.user.nombre,
+    // imagen : req.user.imagen
+  })
+}
+// Guardar cambios editar perfil
+exports.editarPerfil = async (req, res) => {
+  const usuario = await Usuarios.findById(req.user._id);
 
-//     usuario.nombre = req.body.nombre;
-//     usuario.email = req.body.email;
-//     if(req.body.password) {
-//         usuario.password = req.body.password
-//     }
+  console.log(usuario);
 
-//     if(req.file) {
-//         usuario.imagen = req.file.filename;
-//     }
+  usuario.nombre = req.body.nombre;
+  usuario.email = req.body.email;
+  if (req.body.password) {
+    usuario.password = req.body.password
+  }
 
-//     await usuario.save();
+  // if(req.file) {
+  //     usuario.imagen = req.file.filename;
+  // }
 
-//     req.flash('correcto', 'Cambios Guardados Correctamente');
-//     // redirect
-//     res.redirect('/administracion');
-// }
+  console.log('user after save', usuario);
 
-// // sanitizar y validar el formulario de editar perfiles
-// exports.validarPerfil = (req, res, next) => {
-//     // sanitizar
-//     req.sanitizeBody('nombre').escape();
-//     req.sanitizeBody('email').escape();
-//     if(req.body.password){
-//         req.sanitizeBody('password').escape();
-//     }
-//     // validar
-//     req.checkBody('nombre', 'El nombre no puede ir vacio').notEmpty();
-//     req.checkBody('email', 'El correo no puede ir vacio').notEmpty();
+  await usuario.save();
 
-//     const errores = req.validationErrors();
+  req.flash('correcto', 'Cambios Guardados Correctamente');
+  // redirect
+  res.redirect('/administracion');
+}
 
-//     if(errores) {
-//         req.flash('error', errores.map(error => error.msg));
+// sanitizar y validar el formulario de editar perfiles
+exports.validarPerfil = (req, res, next) => {
+  // sanitizar
+  req.sanitizeBody('nombre').escape();
+  req.sanitizeBody('email').escape();
+  if (req.body.password) {
+    req.sanitizeBody('password').escape();
+  }
+  // validar
+  req.checkBody('nombre', 'El nombre no puede ir vacio').notEmpty();
+  req.checkBody('email', 'El correo no puede ir vacio').notEmpty();
 
-//         res.render('editar-perfil', {
-//             nombrePagina : 'Edita tu perfil en devJobs',
-//             usuario: req.user,
-//             cerrarSesion: true,
-//             nombre : req.user.nombre,
-//             imagen : req.user.imagen,
-//             mensajes : req.flash()
-//         })
-//     }
-//     next(); // todo bien, siguiente middleware!
-// }
+  const errores = req.validationErrors();
+
+  if (errores) {
+    req.flash('error', errores.map(error => error.msg));
+
+    res.render('editar-perfil', {
+      nombrePagina: 'Edita tu perfil en devJobs',
+      usuario: req.user,
+      cerrarSesion: true,
+      nombre: req.user.nombre,
+      imagen: req.user.imagen,
+      mensajes: req.flash()
+    })
+  }
+  next(); // todo bien, siguiente middleware!
+}

@@ -15,7 +15,7 @@ module.exports = () => {
   );
   router.post('/vacantes/nueva',
     authController.verificarUsuario,
-    // vacantesController.validarVacante,
+    vacantesController.validarVacante,
     vacantesController.agregarVacante
   );
 
@@ -30,7 +30,7 @@ module.exports = () => {
 
   router.post('/vacantes/editar/:url',
     authController.verificarUsuario,
-    // vacantesController.validarVacante,
+    vacantesController.validarVacante,
     vacantesController.editarVacante
   );
 
@@ -73,10 +73,11 @@ module.exports = () => {
     authController.autenticarUsuario
   );
 
-  // //cerrar sesion
-  // router.get('/cerrar-sesion',
-  //   authController.cerrarSesion
-  // );
+  //cerrar sesion
+  router.get('/cerrar-sesion',
+    authController.verificarUsuario, // KILL
+    authController.cerrarSesion
+  );
 
   //panel de administracion
   router.get('/administracion',
@@ -86,17 +87,17 @@ module.exports = () => {
 
   // router.post('/iniciar-sesion', authController.autenticarUsuario);
 
-  // router.get('/editar-perfil',
-  //   authController.verificarUsuario,
-  //   usuariosController.formEditarPerfil
-  // );
+  router.get('/editar-perfil',
+    authController.verificarUsuario,
+    usuariosController.formEditarPerfil
+  );
 
-  // router.post('/editar-perfil',
-  //   authController.verificarUsuario,
-  //   // usuariosController.validarPerfil,
-  //   usuariosController.subirImagen,
-  //   usuariosController.editarPerfil
-  // );
+  router.post('/editar-perfil',
+    authController.verificarUsuario,
+    usuariosController.validarPerfil,
+    // usuariosController.subirImagen,
+    usuariosController.editarPerfil
+  );
 
   // //Recibir mensajes de candidators
 

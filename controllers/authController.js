@@ -6,46 +6,46 @@ const Vacante = mongoose.model('Vacante');
 // const enviarEmail = require('../handlers/email');
 
 exports.autenticarUsuario = passport.authenticate('local', {
-    successRedirect : '/administracion',
-    failureRedirect : '/iniciar-sesion', 
-    failureFlash: true,
-    badRequestMessage : 'Ambos campos son obligatorios'
+  successRedirect: '/administracion',
+  failureRedirect: '/iniciar-sesion',
+  failureFlash: true,
+  badRequestMessage: 'Ambos campos son obligatorios'
 });
 
 // Revisar si el usuario esta autenticado o no
 exports.verificarUsuario = (req, res, next) => {
 
-    // revisar el usuario
-    if(req.isAuthenticated()){ //metodo de passport, devuelve true o false si el usuario esta autentucado o no
-        return next(); // estan autenticados
-    }
+  // revisar el usuario
+  if (req.isAuthenticated()) { //metodo de passport, devuelve true o false si el usuario esta autentucado o no
+    return next(); // estan autenticados
+  }
 
-    // redireccionar
-    res.redirect('/iniciar-sesion');
+  // redireccionar
+  res.redirect('/iniciar-sesion');
 
 }
 
 exports.mostrarPanel = async (req, res) => {
 
-    // consultar el usuario autenticado
-    const vacantes = await Vacante.find({ autor: req.user._id });
-    
-    res.render('administracion', {
-        nombrePagina: 'Panel de Administración',
-        tagline: 'Crea y Administra tus vacantes desde aquí',
-        // cerrarSesion: true,
-        // nombre : req.user.nombre,
-        // imagen : req.user.imagen,
-        vacantes
-    })
+  // consultar el usuario autenticado
+  const vacantes = await Vacante.find({ autor: req.user._id });
+
+  res.render('administracion', {
+    nombrePagina: 'Panel de Administración',
+    tagline: 'Crea y Administra tus vacantes desde aquí',
+    cerrarSesion: true,
+    nombre: req.user.nombre,
+    // imagen : req.user.imagen,
+    vacantes
+  })
 }
 
 
-// exports.cerrarSesion = (req, res) => {
-//     req.logout();
-//     req.flash('correcto', 'Cerraste Sesión Correctamente');
-//     return res.redirect('/iniciar-sesion');
-// }
+exports.cerrarSesion = (req, res) => {
+  req.logout();
+  req.flash('correcto', 'Cerraste Sesión Correctamente');
+  return res.redirect('/iniciar-sesion');
+}
 
 // /** Formulario para Reiniciar el password */
 // exports.formReestablecerPassword = (req, res ) => {
