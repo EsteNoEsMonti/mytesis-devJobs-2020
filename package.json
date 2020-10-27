@@ -20,6 +20,7 @@
   "homepage": "https://github.com/MKluna/tesis-devJobs#readme",
   "dependencies": {
     "@handlebars/allow-prototype-access": "^1.0.3",
+    "axios": "^0.21.0",
     "bcrypt": "^5.0.0",
     "concurrently": "^5.3.0",
     "connect-flash": "^0.1.1",
@@ -35,7 +36,8 @@
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "shortid": "^2.2.15",
-    "slug": "^3.3.5"
+    "slug": "^3.3.5",
+    "sweetalert2": "^10.8.1"
   },
   "devDependencies": {
     "@babel/core": "^7.11.6",

@@ -9,7 +9,7 @@ exports.formularioNuevaVacante = (req, res) => {
 		nombrePagina: 'Nueva Vacante',
 		tagline: 'Llena el formulario y publica tu vacante',
 		cerrarSesion: true,
-		nombre : req.user.nombre,
+		nombre: req.user.nombre,
 		// imagen : req.user.imagen
 	})
 }
@@ -60,78 +60,75 @@ exports.formEditarVacante = async (req, res, next) => {
 }
 
 exports.editarVacante = async (req, res) => {
-    const vacanteActualizada = req.body;
+	const vacanteActualizada = req.body;
 
-    vacanteActualizada.skills = req.body.skills.split(',');
+	vacanteActualizada.skills = req.body.skills.split(',');
 
-    const vacante = await Vacante.findOneAndUpdate({url: req.params.url}, vacanteActualizada, {
-        new: true,
-        runValidators: true
-		} );
-		//1er valor es donde vas a actualizar, el 2do que vas a actualizar y el 3ro opciones de configutacion
+	const vacante = await Vacante.findOneAndUpdate({ url: req.params.url }, vacanteActualizada, {
+		new: true,
+		runValidators: true
+	});
+	//1er valor es donde vas a actualizar, el 2do que vas a actualizar y el 3ro opciones de configutacion
 
-    res.redirect(`/vacantes/${vacante.url}`);
+	res.redirect(`/vacantes/${vacante.url}`);
 }
 
 // Validar y Sanitizar los campos de las nuevas vacantes
 exports.validarVacante = (req, res, next) => {
-    // sanitizar los campos
-    req.sanitizeBody('titulo').escape();
-    req.sanitizeBody('empresa').escape();
-    req.sanitizeBody('ubicacion').escape();
-    req.sanitizeBody('salario').escape();
-    req.sanitizeBody('contrato').escape();
-    req.sanitizeBody('skills').escape();
+	// sanitizar los campos
+	req.sanitizeBody('titulo').escape();
+	req.sanitizeBody('empresa').escape();
+	req.sanitizeBody('ubicacion').escape();
+	req.sanitizeBody('salario').escape();
+	req.sanitizeBody('contrato').escape();
+	req.sanitizeBody('skills').escape();
 
-    // validar
-    req.checkBody('titulo', 'Agrega un Titulo a la Vacante').notEmpty();
-    req.checkBody('empresa', 'Agrega una Empresa').notEmpty();
-    req.checkBody('ubicacion', 'Agrega una Ubicación').notEmpty();
-    req.checkBody('contrato', 'Selecciona el Tipo de Contrato').notEmpty();
-    req.checkBody('skills', 'Agrega al menos una habilidad').notEmpty();
+	// validar
+	req.checkBody('titulo', 'Agrega un Titulo a la Vacante').notEmpty();
+	req.checkBody('empresa', 'Agrega una Empresa').notEmpty();
+	req.checkBody('ubicacion', 'Agrega una Ubicación').notEmpty();
+	req.checkBody('contrato', 'Selecciona el Tipo de Contrato').notEmpty();
+	req.checkBody('skills', 'Agrega al menos una habilidad').notEmpty();
 
-    const errores = req.validationErrors();
+	const errores = req.validationErrors();
 
-    if(errores) {
-        // Recargar la vista con los errores
-        req.flash('error', errores.map(error => error.msg));
+	if (errores) {
+		// Recargar la vista con los errores
+		req.flash('error', errores.map(error => error.msg));
 
-        res.render('nueva-vacante', {
-            nombrePagina: 'Nueva Vacante',
-            tagline: 'Llena el formulario y publica tu vacante',
-            cerrarSesion: true,
-            nombre : req.user.nombre,
-            mensajes: req.flash()
-        })
-    }
+		res.render('nueva-vacante', {
+			nombrePagina: 'Nueva Vacante',
+			tagline: 'Llena el formulario y publica tu vacante',
+			cerrarSesion: true,
+			nombre: req.user.nombre,
+			mensajes: req.flash()
+		})
+	}
 
-    next(); // siguiente middleware
+	next(); // siguiente middleware
 }
 
-// exports.eliminarVacante = async (req, res) => {
-//     const { id } = req.params;
+exports.eliminarVacante = async (req, res) => {
+	const { id } = req.params;
 
-//     const vacante = await Vacante.findById(id);
+	const vacante = await Vacante.findById(id);
 
-//     if(verificarAutor(vacante, req.user)){
-//         // Todo bien, si es el usuario, eliminar
-//         vacante.remove();
-//         res.status(200).send('Vacante Eliminada Correctamente');
-//     } else {
-//         // no permitido
-//         res.status(403).send('Error')
-//     }
+	if (verificarAutor(vacante, req.user)) {
+		// Todo bien, si es el usuario, eliminar
+		vacante.remove();
+		res.status(200).send('Vacante Eliminada Correctamente UwU');
+	} else {
+		// no permitido
+		res.status(403).send('Error')
+	}
+}
 
-
-
-// }
-
-// const verificarAutor = (vacante = {}, usuario = {}) => {
-//     if(!vacante.autor.equals(usuario._id)) {
-//         return false
-//     } 
-//     return true;
-// }
+const verificarAutor = (vacante = {}, usuario = {}) => {
+    if(!vacante.autor.equals(usuario._id)) {
+        return false
+    } 
+    return true;
+}
 
 
 // // Subir archivos en PDF

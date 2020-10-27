@@ -34,10 +34,10 @@ module.exports = () => {
     vacantesController.editarVacante
   );
 
-  // //eliminar vacantes
-  // router.delete('/vacantes/eliminar/:id',
-  //   vacantesController.eliminarVacante
-  // );
+  //eliminar vacantes
+  router.delete('/vacantes/eliminar/:id',
+    vacantesController.eliminarVacante
+  );
 
   //crear cuentas
   router.get('/crear-cuenta',
