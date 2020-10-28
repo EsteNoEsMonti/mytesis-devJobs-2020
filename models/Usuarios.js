@@ -20,7 +20,7 @@ const usuariosSchema = new mongoose.Schema({
   },
   token: String, //si solo es un tipo de dato se le puede sacar las llaves
   expira: Date,
-  // imagen: String
+  imagen: String
 });
 
 // Método para hashear los passwords
