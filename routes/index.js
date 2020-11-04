@@ -99,17 +99,17 @@ module.exports = () => {
     usuariosController.editarPerfil
   );
 
-  // //Recibir mensajes de candidators
+  //Recibir mensajes de candidators
 
-  // router.post('/vacantes/:url',
-  //   vacantesController.subirCV,
-  //   vacantesController.contactar,
-  // );
+  router.post('/vacantes/:url',
+    vacantesController.subirCV,
+    vacantesController.contactar,
+  );
 
-  // router.get('/candidatos/:id',
-  //   authController.verificarUsuario,
-  //   vacantesController.mostrarCandidatos
-  // );
+  router.get('/candidatos/:id',
+    authController.verificarUsuario,
+    vacantesController.mostrarCandidatos
+  );
 
   // //Buscador de vacantes
   // router.post('/buscador',

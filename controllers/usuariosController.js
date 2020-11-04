@@ -4,7 +4,7 @@ const multer = require('multer');
 const shortid = require('shortid');
 
 exports.subirImagen = (req, res, next) => {
-  upload(req, res, function(error) {
+  upload(req, res, function (error) {
     if (error) {
       if (error instanceof multer.MulterError) {
         if (error.code === 'LIMIT_FILE_SIZE') {
@@ -24,24 +24,24 @@ exports.subirImagen = (req, res, next) => {
 }
 // Opciones de Multer
 const configuracionMulter = {
-    limits : { fileSize : 100000 }, //imagen de 100kb
-    storage: fileStorage = multer.diskStorage({ //storage para ver donde vamos guardando los archivos || multer.diskStorage para que se guarden en el servidor
-        destination : (req, file, cb) => {
-            cb(null, __dirname+'../../public/uploads/perfiles');
-        }, 
-        filename : (req, file, cb) => {
-            const extension = file.mimetype.split('/')[1];
-            cb(null, `${shortid.generate()}.${extension}`);
-        }
-    }),
-    fileFilter(req, file, cb) { // Para limitar el tipo de archivo, aceptamos o rechezamos
-        if(file.mimetype === 'image/jpeg' || file.mimetype === 'image/png' ) {
-            // el callback se ejecuta como true o false : true cuando la imagen se acepta
-            cb(null, true);
-        } else {
-            cb(new Error('Formato No Válido >:('), false);
-        }
+  limits: { fileSize: 100000 }, //imagen de 100kb
+  storage: fileStorage = multer.diskStorage({ //storage para ver donde vamos guardando los archivos || multer.diskStorage para que se guarden en el servidor
+    destination: (req, file, cb) => {
+      cb(null, __dirname + '../../public/uploads/perfiles');
+    },
+    filename: (req, file, cb) => {
+      const extension = file.mimetype.split('/')[1];
+      cb(null, `${shortid.generate()}.${extension}`);
     }
+  }),
+  fileFilter(req, file, cb) { // Para limitar el tipo de archivo, aceptamos o rechezamos
+    if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+      // el callback se ejecuta como true o false : true cuando la imagen se acepta
+      cb(null, true);
+    } else {
+      cb(new Error('Formato No Válido >:('), false);
+    }
+  }
 }
 
 const upload = multer(configuracionMulter).single('imagen');
@@ -116,7 +116,7 @@ exports.formEditarPerfil = (req, res) => {
     usuario: req.user,
     cerrarSesion: true,
     nombre: req.user.nombre,
-    imagen : req.user.imagen
+    imagen: req.user.imagen
   })
 }
 // Guardar cambios editar perfil
@@ -129,8 +129,8 @@ exports.editarPerfil = async (req, res) => {
     usuario.password = req.body.password
   }
 
-  if(req.file) {
-      usuario.imagen = req.file.filename;
+  if (req.file) {
+    usuario.imagen = req.file.filename;
   }
 
   await usuario.save();

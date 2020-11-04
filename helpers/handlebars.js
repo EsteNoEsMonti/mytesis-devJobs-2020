@@ -1,6 +1,12 @@
 module.exports = {
   seleccionarSkills: (seleccionadas = [], opciones) => {
 
+    // const con rubros
+    //if rubro === software {
+        //skills = skillsSfotware
+    //}
+    //PERO COMO MIERDA ME COMUNICO CON CON ESTO DESDE NUEVA-VACANTE.HANDLEBARS
+
     const skills = ['HTML5', 'CSS3', 'CSSGrid', 'Flexbox', 'JavaScript', 'jQuery', 'Node', 'Angular', 'VueJS', 'ReactJS', 'React Hooks', 'Redux', 'Apollo', 'GraphQL', 'TypeScript', 'PHP', 'Laravel', 'Symfony', 'Python', 'Django', 'ORM', 'Sequelize', 'Mongoose', 'SQL', 'MVC', 'SASS', 'WordPress'];
 
     let html = '';
