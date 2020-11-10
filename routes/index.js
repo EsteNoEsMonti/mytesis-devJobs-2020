@@ -49,21 +49,21 @@ module.exports = () => {
     usuariosController.crearUsuario
   );
 
-  // //Resetear password(emails)
-  // router.get('/reestablecer-password',
-  //   authController.formReestablecerPassword
-  // );
-  // router.post('/reestablecer-password',
-  //   authController.enviarToken
-  // );
+  //Resetear password(emails)
+  router.get('/reestablecer-password',
+    authController.formReestablecerPassword
+  );
+  router.post('/reestablecer-password',
+    authController.enviarToken
+  );
 
-  // router.get('/reestablecer-password/:token',
-  //   authController.reestablecerPassword
-  // );
+  router.get('/reestablecer-password/:token',
+    authController.reestablecerPassword
+  );
 
-  // router.post('/reestablecer-password/:token',
-  //   authController.guardarPassword
-  // );
+  router.post('/reestablecer-password/:token',
+    authController.guardarPassword
+  );
 
   //authenticar usuarios
   router.get('/iniciar-sesion',
@@ -111,10 +111,10 @@ module.exports = () => {
     vacantesController.mostrarCandidatos
   );
 
-  // //Buscador de vacantes
-  // router.post('/buscador',
-  //   vacantesController.buscarVacantes
-  // );
+  //Buscador de vacantes
+  router.post('/buscador',
+    vacantesController.buscarVacantes
+  );
 
   return router;
 }
