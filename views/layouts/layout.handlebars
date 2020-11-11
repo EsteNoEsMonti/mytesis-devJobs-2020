@@ -18,11 +18,13 @@
     </h1>
 
     {{#if barra}}
-    <div class="buscador">
+    <div class="buscador cerrar-session">
       <form action="/buscador" method="POST">
         <input type="text" name="q" class="buscar">
         <input type="submit" value="Buscar">
       </form>
+      <a style="margin-left: 10px; margin-top: 15px; color: grey"href="/iniciar-sesion">Iniciar Sesion</a>
+      <a style="margin-left: 10px; margin-top: 15px; color: grey"href="/crear-cuenta">Crear Cuenta</a>
     </div>
     {{/if}}
 
