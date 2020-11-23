@@ -23,8 +23,10 @@
         <input type="text" name="q" class="buscar">
         <input type="submit" value="Buscar">
       </form>
-      <a style="margin-left: 10px; margin-top: 15px; color: grey"href="/iniciar-sesion">Iniciar Sesion</a>
-      <a style="margin-left: 10px; margin-top: 15px; color: grey"href="/crear-cuenta">Crear Cuenta</a>
+      {{!-- {{#if enlaces}} --}}
+        {{!-- <a style="margin-left: 10px; margin-top: 15px; color: grey"href="/administracion">Ingresar a Administracion</a> --}}
+        {{!-- <a style="margin-left: 10px; margin-top: 15px; color: grey"href="/crear-cuenta">Crear Cuenta</a> --}}
+      {{!-- {{/if}} --}}
     </div>
     {{/if}}
 
@@ -49,6 +51,16 @@
     {{#if boton}}
     <a href="/vacantes/nueva" class="btn btn-azul">Publicar Nueva Vacante</a>
     {{/if}}
+
+    {{#if tagline2}}
+    <p class="tagline">{{tagline2}} <a href="/administracion" class="tagline">Aquí - Ir a Administracion</a></p>
+    {{/if}}
+
+    {{!-- {{#if boton}} --}}
+    {{!-- <a href="/administracion" class="btn btn-azul">Ir a Administracion</a> --}}
+    {{!-- <a href="/crear-cuenta" class="btn btn-azul">Crear Cuenta</a> --}}
+    {{!-- <p style="color: white;">Tambien puedes crear una nueva cuenta haciendo click <a href="/crear-cuenta" style="color: white;" class="">aquí - Crear Cuenta</a></p> --}}
+    {{!-- {{/if}} --}}
   </header>
 
 

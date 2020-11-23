@@ -41,7 +41,8 @@ exports.mostrarVacante = async (req, res, next) => {
 	res.render('vacante', {
 		vacante,
 		nombrePagina: vacante.titulo,
-		barra: true
+		barra: true,
+		// cerrarSesion: true //new
 	})
 }
 
@@ -231,6 +232,7 @@ exports.buscarVacantes = async (req, res) => {
 	res.render('home', {
 		nombrePagina: `Resultados para la búsqueda : ${req.body.q}`,
 		barra: true,
-		vacantes
+		vacantes,
+		// cerrarSesion: true //new
 	})
 }

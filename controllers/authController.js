@@ -36,7 +36,8 @@ exports.mostrarPanel = async (req, res) => {
     cerrarSesion: true,
     nombre: req.user.nombre,
     imagen: req.user.imagen,
-    vacantes
+    vacantes,
+    // barra: true //new
   })
 }
 

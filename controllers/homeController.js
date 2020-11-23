@@ -8,10 +8,13 @@ exports.mostrarTrabajos = async (req, res, next) => {
   if (!vacantes) return next();
 
   res.render('home', {
+    // nombrePagina: 'devJobs',
     nombrePagina: 'devJobs',
-    tagline: 'Encuentra y Pública Trabajos para Desarrolladores Web',
+    tagline: 'Encuentra y Pública Trabajos para el Ámbito Tecnológico en Catamarca',
+    tagline2: 'Si eres Reclutador puedes ingresar al Panel de Administracion desde desde',
     barra: true,
     boton: true,
-    vacantes
+    vacantes,
+    // enlaces: true //new
   })
 }
