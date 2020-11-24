@@ -24,53 +24,57 @@
         <input type="submit" value="Buscar">
       </form>
       {{!-- {{#if enlaces}} --}}
-        {{!-- <a style="margin-left: 10px; margin-top: 15px; color: grey"href="/administracion">Ingresar a Administracion</a> --}}
-        {{!-- <a style="margin-left: 10px; margin-top: 15px; color: grey"href="/crear-cuenta">Crear Cuenta</a> --}}
+      {{!-- <a style="margin-left: 10px; margin-top: 15px; color: grey"href="/administracion">Ingresar a Administracion</a> --}}
+      {{!-- <a style="margin-left: 10px; margin-top: 15px; color: grey"href="/crear-cuenta">Crear Cuenta</a> --}}
       {{!-- {{/if}} --}}
     </div>
     {{/if}}
 
     {{#if cerrarSesion}}
-      <div class="cerrar-sesion">
-        <p>Hola! {{nombre}}</p>
-        {{!-- {{#if imagen}}
+    <div class="cerrar-sesion">
+      <p>Hola! {{nombre}}</p>
+      {{!-- {{#if imagen}}
           <img src="/uploads/perfiles/{{imagen}}" class="admin-perfil">
         {{/if}} --}}
-        <a href="/administracion">Administración</a>
-        <a href="/cerrar-sesion">Cerrar Sesión</a>
-      </div>
+      <a href="/administracion">Administración</a>
+      <a href="/cerrar-sesion">Cerrar Sesión</a>
+    </div>
     {{/if}}
   </div>
 
-  <header class="site-header contenedor separador">
-    <h2>{{nombrePagina}}</h2>
-    {{#if tagline}}
-    <p class="tagline">{{tagline}}</p>
-    {{/if}}
+  <div class="headerimg">
+    <div class="headerimg2">
+      <header class="site-header contenedor separador">
+        <h2>{{nombrePagina}}</h2>
+        {{#if tagline}}
+        <p class="tagline">{{tagline}}</p>
+        {{/if}}
 
-    {{#if boton}}
-    <a href="/vacantes/nueva" class="btn btn-azul">Publicar Nueva Vacante</a>
-    {{/if}}
+        {{#if boton}}
+        <a href="/vacantes/nueva" class="btn btn-azul">Publicar Nueva Vacante</a>
+        {{/if}}
 
-    {{#if tagline2}}
-    <p class="tagline">{{tagline2}} <a href="/administracion" class="tagline">Aquí - Ir a Administracion</a></p>
-    {{/if}}
+        {{#if tagline2}}
+        <p class="tagline">{{tagline2}} <a href="/administracion" class="tagline">Aquí - Ir a Administracion</a></p>
+        {{/if}}
 
-    {{!-- {{#if boton}} --}}
-    {{!-- <a href="/administracion" class="btn btn-azul">Ir a Administracion</a> --}}
-    {{!-- <a href="/crear-cuenta" class="btn btn-azul">Crear Cuenta</a> --}}
-    {{!-- <p style="color: white;">Tambien puedes crear una nueva cuenta haciendo click <a href="/crear-cuenta" style="color: white;" class="">aquí - Crear Cuenta</a></p> --}}
-    {{!-- {{/if}} --}}
-  </header>
+        {{!-- {{#if boton}} --}}
+        {{!-- <a href="/administracion" class="btn btn-azul">Ir a Administracion</a> --}}
+        {{!-- <a href="/crear-cuenta" class="btn btn-azul">Crear Cuenta</a> --}}
+        {{!-- <p style="color: white;">Tambien puedes crear una nueva cuenta haciendo click <a href="/crear-cuenta" style="color: white;" class="">aquí - Crear Cuenta</a></p> --}}
+        {{!-- {{/if}} --}}
+      </header>
+    </div>
+  </div>
 
 
   <div class="contenido-principal contenedor">
     {{#if mensajes}}
-      <div class="alertas">
-        {{#mostrarAlertas mensajes}}
-          <li>do</li>
-        {{/mostrarAlertas}}
-      </div>
+    <div class="alertas">
+      {{#mostrarAlertas mensajes}}
+      <li>do</li>
+      {{/mostrarAlertas}}
+    </div>
     {{/if}}
     {{{body}}}
   </div>
