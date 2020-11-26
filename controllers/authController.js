@@ -9,6 +9,7 @@ exports.autenticarUsuario = passport.authenticate('local', {
   successRedirect: '/administracion',
   failureRedirect: '/iniciar-sesion',
   failureFlash: true,
+  successFlash: 'Se inicio sesión correctamente', //ver como darle styles -> http://www.passportjs.org/docs/authenticate/
   badRequestMessage: 'Ambos campos son obligatorios'
 });
 
