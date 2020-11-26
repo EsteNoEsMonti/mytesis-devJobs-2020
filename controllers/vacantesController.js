@@ -27,7 +27,8 @@ exports.agregarVacante = async (req, res) => {
 	// almacenarlo en la base de datos
 	const nuevaVacante = await vacante.save()
 
-	// redireccionar
+	// redireccionar con mensaje de confirmación
+	req.flash('correcto', 'Vacante creada correctamente');
 	res.redirect(`/vacantes/${nuevaVacante.url}`);
 
 }
