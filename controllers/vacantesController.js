@@ -36,14 +36,18 @@ exports.agregarVacante = async (req, res) => {
 // muestra una vacante
 exports.mostrarVacante = async (req, res, next) => {
 	const vacante = await Vacante.findOne({ url: req.params.url }).populate('autor'); //populate RELACIONA las tablas
+
+	//Normalizando Fecha
+	let creada2 = vacante.creada.toString().slice(4, -30); //mmm dd aaaa (-30) _ -20 para que tenga la hora
+
 	// si no hay resultados
 	if (!vacante) return next();
 
 	res.render('vacante', {
 		vacante,
 		nombrePagina: vacante.titulo,
+		fechaNormalizada: creada2,
 		barra: true,
-		// cerrarSesion: true //new
 	})
 }
 
@@ -118,7 +122,7 @@ exports.eliminarVacante = async (req, res) => {
 	if (verificarAutor(vacante, req.user)) {
 		// Todo bien, si es el usuario, eliminar
 		vacante.remove();
-		res.status(200).send('Vacante Eliminada Correctamente UwU');
+		res.status(200).send('Vacante Eliminada Correctamente');
 	} else {
 		// no permitido
 		res.status(403).send('Error')

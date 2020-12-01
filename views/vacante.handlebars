@@ -15,6 +15,10 @@
 		<p class="etiqueta">Salario</p>
 		<p class="nombre">$ {{vacante.salario}}</p>
 	</div>
+	{{!-- <div class="caja">
+		<p class="etiqueta">Publicada</p>
+		<p class="nombre">{{fechaNormalizada}}</p>
+	</div> --}}
 </div>
 
 <div class="vacante-contenedor contenedor">
@@ -23,6 +27,9 @@
 		<div class="vacante-descripcion">
 			{{{vacante.descripcion}}}
 		</div>
+
+		<h2 style="margin-top: 30px;">Fecha de publicacion de la vacante</h2>
+		<p style="color: white;">{{fechaNormalizada}}</p>
 
 
 		{{!-- <a href="/vacantes/editar/{{vacante.url}}" class="btn btn-azul editar-btn">Editar Vacante</a> --}}
@@ -66,21 +73,17 @@
 	<div class="info-reclutador">
 		<h2>Información Reclutador</h2>
 		{{#if vacante.autor.nombre}}
-			<p>{{vacante.autor.nombre}}</p>
+		<p>{{vacante.autor.nombre}}</p>
 		{{/if}}
 		{{#if vacante.autor.imagen}}
-			<img src="/uploads/perfiles/{{vacante.autor.imagen}}">
+		<img src="/uploads/perfiles/{{vacante.autor.imagen}}">
 		{{/if}}
- </div>
+	</div>
 </div>
 
-<a 
-	href="/" 
-	class="btn btn-azul editar-btn" 
-	style="
+<a href="/" class="btn btn-azul editar-btn" style="
 		width: 25%;
 		float: right;
 		margin-bottom: 45px;
 		margin-top: -25px;
-	"
->Volver al Inicio</a>
+	">Volver al Inicio</a>
