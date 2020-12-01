@@ -29,7 +29,17 @@ exports.verificarUsuario = (req, res, next) => {
 exports.mostrarPanel = async (req, res) => {
 
   // consultar el usuario autenticado
-  const vacantes = await Vacante.find({ autor: req.user._id });
+  const vacantesSinFiltrar = await Vacante.find({ autor: req.user._id });
+
+  let vacantes = []
+  let vacantesSoftDeleted = []
+  vacantesSinFiltrar.forEach( vacante => {
+    if (vacante.deleted === false) {
+      vacantes.push(vacante);
+    } else {
+      vacantesSoftDeleted.push(vacante)
+    }
+  });
 
   res.render('administracion', {
     nombrePagina: 'Panel de Administración',
@@ -38,7 +48,7 @@ exports.mostrarPanel = async (req, res) => {
     nombre: req.user.nombre,
     imagen: req.user.imagen,
     vacantes,
-    // barra: true //new
+    vacantesSoftDeleted
   })
 }
 

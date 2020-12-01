@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 const slug = require('slug');
 const shortid = require('shortid');
+const mongoose_delete = require('mongoose-delete');
 
 const vacantesSchema = new mongoose.Schema({
   titulo: {
@@ -46,6 +47,10 @@ const vacantesSchema = new mongoose.Schema({
     ref: 'Usuarios',
     required: 'El autor es obligatorio'
   },
+  deleted: {
+    type: Boolean,
+    default: false
+  },
   creada: {
     type: Date,
     default: Date.now
@@ -63,6 +68,9 @@ vacantesSchema.pre('save', function (next) {
 
 // Crear un indice
 vacantesSchema.index({ titulo: 'text' });
+
+// CREO QUE Agregar plugin soft-deleted
+vacantesSchema.plugin(mongoose_delete, { deletedAt : true }); // creo que ya estaría implementado el plugin
 
 
 module.exports = mongoose.model('Vacante', vacantesSchema);

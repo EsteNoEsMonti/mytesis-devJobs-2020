@@ -34,6 +34,7 @@
     "handlebars": "^4.7.6",
     "http-errors": "^1.8.0",
     "mongoose": "^5.2.8",
+    "mongoose-delete": "^0.5.3",
     "multer": "^1.4.2",
     "nodemailer": "^6.4.15",
     "nodemailer-express-handlebars": "^4.0.0",

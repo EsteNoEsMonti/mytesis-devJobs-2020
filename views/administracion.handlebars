@@ -9,29 +9,62 @@
 
   <div class="panel-administracion">
     {{#if vacantes.length}}
-    {{#each vacantes}}
-    <div class="vacante ">
-      <div class="caja">
-        <h3>{{empresa}}</h3>
-        <p class="puesto">{{titulo}}</p>
-        <p class="candidatos">
-          {{candidatos.length}} Candidato(s)
-        </p>
+      {{#each vacantes}}
+        <div class="vacante ">
+          <div class="caja">
+            <h3>{{empresa}}</h3>
+            <p class="puesto">{{titulo}}</p>
+            <p class="candidatos">
+              {{candidatos.length}} Candidato(s)
+            </p>
 
-      </div>
-      <div class="centrar-vertical caja">
-        <a href="/candidatos/{{id}}" class="btn btn-amarillo">Candidatos</a>
-      </div>
-      <div class="centrar-vertical caja">
-        <a href="/vacantes/editar/{{url}}" class="btn btn-verde">Editar</a>
-      </div>
-      <div class="centrar-vertical caja">
-        <a href="#" data-eliminar={{id}} class="btn btn-rojo">Eliminar</a>
-      </div>
-    </div>
-    {{/each}}
+          </div>
+          <div class="centrar-vertical caja">
+            <a href="/candidatos/{{id}}" class="btn btn-amarillo">Candidatos</a>
+          </div>
+          <div class="centrar-vertical caja">
+            <a href="/vacantes/editar/{{url}}" class="btn btn-verde">Editar</a>
+          </div>
+          <div class="centrar-vertical caja">
+            <a href="#" data-eliminar={{id}} class="btn btn-rojo">Eliminar</a>
+          </div>
+        </div>
+      {{/each}}
     {{else}}
-    <p>No Hay vacantes, crea una</p>
+      <p>No Hay vacantes, crea una</p>
     {{/if}}
+
+    <hr color="#272727" size="0.5" style="
+      width: 75%;
+      margin-top: 50px;
+      margin-bottom: 50px;
+    ">
+
+    {{#if vacantesSoftDeleted}}
+      <h3>Tus Vacantes eliminadas</h3>
+
+      {{#each vacantesSoftDeleted}}
+        <div class="vacante ">
+          <div class="caja">
+            <h3>{{empresa}}</h3>
+            <p class="puesto">{{titulo}}</p>
+            <p class="candidatos">
+              Fecha de Eliminacion: {{deletedAt}}
+            </p>
+
+          </div>
+          <div class="centrar-vertical caja">
+            <a href="/candidatos/{{id}}" class="btn btn-amarillo">Candidatos</a>
+          </div>
+          <div class="centrar-vertical caja">
+            <a href="/candidatos/{{id}}" class="btn btn-azul">Restaurar</a>
+          </div>
+        </div>
+      {{/each}}
+    {{else}}
+      <p></p>
+    {{/if}}
+
+
   </div>
 </main>

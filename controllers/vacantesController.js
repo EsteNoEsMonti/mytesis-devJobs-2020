@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const Vacante = mongoose.model('Vacante'); //se puede con requiere y el path
+const mongoose_delete = require('mongoose-delete'); //no sé si hace falta pero por las dudas
+
 
 const multer = require('multer');
 const shortid = require('shortid');
@@ -121,7 +123,8 @@ exports.eliminarVacante = async (req, res) => {
 
 	if (verificarAutor(vacante, req.user)) {
 		// Todo bien, si es el usuario, eliminar
-		vacante.remove();
+		// vacante.remove();
+		vacante.delete();
 		res.status(200).send('Vacante Eliminada Correctamente');
 	} else {
 		// no permitido
