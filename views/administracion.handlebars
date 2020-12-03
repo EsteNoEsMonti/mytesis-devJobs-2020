@@ -57,12 +57,12 @@
             <a href="/candidatos/{{id}}" class="btn btn-amarillo">Candidatos</a>
           </div>
           <div class="centrar-vertical caja">
-            <a href="/candidatos/{{id}}" class="btn btn-azul">Restaurar</a>
+            <a href="#" data-restaurar={{id}} class="btn btn-azul">Restaurar</a>
           </div>
         </div>
       {{/each}}
     {{else}}
-      <p></p>
+      {{null}}
     {{/if}}
 
 

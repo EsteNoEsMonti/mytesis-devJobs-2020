@@ -123,9 +123,24 @@ exports.eliminarVacante = async (req, res) => {
 
 	if (verificarAutor(vacante, req.user)) {
 		// Todo bien, si es el usuario, eliminar
-		// vacante.remove();
-		vacante.delete();
+		// vacante.remove(); //eliminacion dura
+		vacante.delete(); //eliminacion suave - soft-deleted
 		res.status(200).send('Vacante Eliminada Correctamente');
+	} else {
+		// no permitido
+		res.status(403).send('Error')
+	}
+}
+
+exports.restaurarVacante = async (req, res) => {
+	const { id } = req.params;
+
+	const vacante = await Vacante.findById(id);
+
+	if (verificarAutor(vacante, req.user)) {
+		// Todo bien, si es el usuario, restaurar
+		vacante.restore(); 
+		res.status(200).send('Vacante Restaurada Correctamente');
 	} else {
 		// no permitido
 		res.status(403).send('Error')
