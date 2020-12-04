@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Vacante = mongoose.model('Vacante'); //se puede con requiere y el path
 const mongoose_delete = require('mongoose-delete'); //no sé si hace falta pero por las dudas
+const enviarEmail = require('../handlers/email2');
 
 
 const multer = require('multer');
@@ -32,6 +33,30 @@ exports.agregarVacante = async (req, res) => {
 	// redireccionar con mensaje de confirmación
 	req.flash('correcto', 'Vacante creada correctamente');
 	res.redirect(`/vacantes/${nuevaVacante.url}`);
+
+	// enviar un mail a los correos que ya se registraon alguna vez
+	// es decir: recorrer las vacantes existentes y fijarse en sus candidatos
+	const vacanteUrl = `http://${req.headers.host}/vacantes/${nuevaVacante.url}`;
+
+	const usuariosTotal = await Vacante.find().sort({ creada: 1 });
+	
+	const primeraVacante = usuariosTotal[0];
+	// console.log('Primera Vacante >>> ', primeraVacante);
+
+	let candidatosVacante = primeraVacante.candidatos;
+	// console.log('candidatosVacante >>>', candidatosVacante);
+
+	for (const iterator of candidatosVacante) {
+		let email = iterator.email;
+
+		// Enviar notificacion por email
+		await enviarEmail.enviar({
+			email,
+			subject: 'Tu nueva vacante',
+			vacanteUrl,
+			archivo: 'nuevomail'
+		});
+	}
 
 }
 
@@ -139,7 +164,7 @@ exports.restaurarVacante = async (req, res) => {
 
 	if (verificarAutor(vacante, req.user)) {
 		// Todo bien, si es el usuario, restaurar
-		vacante.restore(); 
+		vacante.restore();
 		res.status(200).send('Vacante Restaurada Correctamente');
 	} else {
 		// no permitido
