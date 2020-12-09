@@ -34,29 +34,61 @@ exports.agregarVacante = async (req, res) => {
 	req.flash('correcto', 'Vacante creada correctamente');
 	res.redirect(`/vacantes/${nuevaVacante.url}`);
 
-	// enviar un mail a los correos que ya se registraon alguna vez
-	// es decir: recorrer las vacantes existentes y fijarse en sus candidatos
+	// enviar un mail a los correos que ya se registraon alguna vez --------------------
+	
+	//Creo URL para pasarla al template
 	const vacanteUrl = `http://${req.headers.host}/vacantes/${nuevaVacante.url}`;
 
+	//Obtengo todos las Vacantes
 	const usuariosTotal = await Vacante.find().sort({ creada: 1 });
-	
-	const primeraVacante = usuariosTotal[0];
-	// console.log('Primera Vacante >>> ', primeraVacante);
 
-	let candidatosVacante = primeraVacante.candidatos;
-	// console.log('candidatosVacante >>>', candidatosVacante);
+	//creo arreglo para almacenar los emails y los almaceno todos
+	let candidatesEmailsXD = [];
+	const primeraVacante2 = usuariosTotal;
+	primeraVacante2.forEach( vacante => {
+		vacante.candidatos.forEach( candidato => {
+			let email = candidato.email;
+			candidatesEmailsXD.push(email);
+		});
+	});
 
-	for (const iterator of candidatosVacante) {
-		let email = iterator.email;
+	//limpio los elementos repeditos
+	let result = candidatesEmailsXD.filter((item,index)=>{
+		return candidatesEmailsXD.indexOf(item) === index;
+	})
 
-		// Enviar notificacion por email
+	// console.log('candidatesEmailsXD >>> ', candidatesEmailsXD);
+	// console.log('result >>>>>>',result);
+
+	// recorro cada uno y le mando el mail informativo
+	result.forEach( async (email) => {
 		await enviarEmail.enviar({
 			email,
 			subject: 'Tu nueva vacante',
 			vacanteUrl,
 			archivo: 'nuevomail'
 		});
-	}
+	});
+
+	// ------------------------------------------------------
+
+	// const primeraVacante = usuariosTotal[0];
+	// // console.log('Primera Vacante >>> ', primeraVacante);
+
+	// let candidatosVacante = primeraVacante.candidatos;
+	// // console.log('candidatosVacante >>>', candidatosVacante);
+
+	// for (const iterator of candidatosVacante) {
+	// 	let email = iterator.email;
+
+	// 	// Enviar notificacion por email
+	// 	await enviarEmail.enviar({
+	// 		email,
+	// 		subject: 'Tu nueva vacante',
+	// 		vacanteUrl,
+	// 		archivo: 'nuevomail'
+	// 	});
+	// }
 
 }
 
