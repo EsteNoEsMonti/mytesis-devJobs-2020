@@ -135,6 +135,7 @@ exports.editarVacante = async (req, res) => {
 	});
 	//1er valor es donde vas a actualizar, el 2do que vas a actualizar y el 3ro opciones de configutacion
 
+	req.flash('correcto', 'Vacante Editada correctamente');
 	res.redirect(`/vacantes/${vacante.url}`);
 }
 

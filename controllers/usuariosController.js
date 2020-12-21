@@ -83,6 +83,7 @@ exports.validarRegistro = (req, res, next) => {
   }
 
   // Si toda la validación es correcta
+  req.flash('correcto', 'Cuenta Creada correctamente, por favor Inicie Sesión');
   next();
 }
 
