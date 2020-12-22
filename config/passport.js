@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const Usuarios = mongoose.model('Usuarios');
 
 passport.use(new LocalStrategy({
+    // los usuarios se autentican mediante el email y eso hay que decirle a passport
     usernameField : 'email',
     passwordField : 'password'
     }, async (email, password, done) => {
